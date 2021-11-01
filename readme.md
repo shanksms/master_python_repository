@@ -23,3 +23,65 @@ SUMMATION is assigned to U+2211.  As we have done here, code points are often wr
 four, five or six digit hexadecimal number. Not all code points have yet been allocated to characters. 
 For example, U+0378 is an unassigned code point, and there’s nothing to stop you including this code point in a Python
  str using the \u0378 escape sequence; hence, str really is a sequence of code points and not a sequence of characters
+
+### Converting between bytes and str
+To convert between bytes and str we must know the encoding of the byte sequence used to represent the string's 
+Unicode code points as bytes. Python supports a wide-variety of so-called codecs such as UTF-8, UTF-16, ASCII, Latin-1,
+ Windows-1251, and so on – consult the Python documentation for a current list of codecs
+
+In Python we can encode a Unicode str into a bytes object, and going the other way we can decode a bytes object into
+ a Unicode str. In either direction it's up to us to specify the encoding. Python won't — and generally speaking can't 
+ do anything to prevent you erroneously decoding UTF-16 data stored in a bytes object using, say, a CP037 codec for 
+ handling strings on legacy IBM mainframes.
+
+If you're lucky the decoding will fail with a UnicodeError at runtime; if you're unlucky you'll wind up with a str 
+full of garbage that will go undetected by your program.
+```python
+norsk = "Jeg begynte å fortære en sandwich mens jeg kjørte taxi på vei til quiz"
+data = norsk.encode('utf-8')
+print(data)
+b'Jeg begynte \xc3\xa5 fort\xc3\xa6re en sandwich mens jeg kj\xc3\xb8rte taxi p\xc3\xa5 vei til quiz'
+norwegian = data.decode('utf-8')
+norwegian == norsk
+True
+```
+
+### The __name__  type and executing modules from the command line
+The Python runtime system defines some special variables and attributes, the names of which are delimited by double 
+underscores. One such special variable is called __name__, and it gives us the means for our module to determine whether
+ it has been run as a script or, instead, imported into another module or the REPL. To see how, add:
+print(__name__)
+```python
+from urllib.request import urlopen
+
+
+def fetch_words():
+   with urlopen('http://sixty-north.com/c/t.txt') as story:
+       story_words = []
+       for line in story:
+           line_words = line.decode('utf-8').split()
+           for word in line_words:
+               story_words.append(word)
+
+       for word in story_words:
+           print(word)
+
+print(__name__)
+```
+
+now lets do import from console. you will notice it prints the name of the module.
+```python
+from text_encoding import words
+text_encoding.words
+```
+next, run the module directly (in other words run the module as a script)
+```shell script
+$ python3 words.py
+__main__
+```
+Therefore, we put following check in all the python modules which are supposed to be importable
+and cann also run as script
+```python
+if __name__ == '__main__':
+    pass
+```
