@@ -85,3 +85,13 @@ and cann also run as script
 if __name__ == '__main__':
     pass
 ```
+### enum. 
+enum is used when you want to limit the value of a constant.
+
+```python
+class Condition(Enum):
+    NEW = 0
+    GOOD = 1
+    OK = 2
+```
+
