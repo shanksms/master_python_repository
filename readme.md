@@ -98,4 +98,4 @@ class Condition(Enum):
 ### dunder magic methods
 1. functions, methods, modules that start with __ and end with __
 2. meant to be called indirectly. e.g. n1.__add__(n2) gets called on n1 + n2
-
+__str__ is mainly used to provide information to user of the class. __repr__ is used by developers to know how to create an object 
