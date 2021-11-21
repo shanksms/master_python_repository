@@ -114,3 +114,21 @@ Flight.number(f)
 If provided, the initializer method is called as part of the process of creating a new object when we call the constructor. The initializer method must be called __init__() delimited by the double underscores used for Python runtime machinery. Like all other instance methods, the first argument to __init__() must be self.
 <br>
 If you're coming from a Java, C#, or C++ background it's tempting to think of __init__() as being the constructor. This isn't quite accurate; in Python the the purpose of __init__() is to configure an object that already exists by the time __init__() is called. The self argument is, however, analogous to this in Java, C#, or C++. In Python the actual constructor is provided by the Python runtime system and one of the things it does is check for the existence of an instance initializer and call it when present.
+
+### class methods
+@classmathod decorator is used to mark a method in a class as a class method. 
+This method will have access to all the class level variables. Generally, 
+a classmethod is used to define an alternate constructor. Take a look at the below example:
+```python
+import time
+class Date:
+    # primary contructor
+    def __init__(self, year, month, day):
+        self.year = year
+        self.month = month
+        self.day = day
+    @classmethod
+    def today(cls):
+        t = time.localtime()
+        return cls(t.tm_year, t.tm_mon, t.tm_mday)
+```
