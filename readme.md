@@ -135,3 +135,25 @@ class Date:
         t = time.localtime()
         return cls(t.tm_year, t.tm_mon, t.tm_mday)
 ```
+
+### decorators
+lets understand decorators with a simple example. when you see below:
+```python
+@mydeco
+def add(a, b):
+    return a + b
+```
+you should imagine this:
+```python
+def add(a, b):
+    return a + b
+
+add = mydeco(add)
+```
+this is the definition of my deco
+```python
+def mydeco(func):
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs)
+    return wrapper
+```
