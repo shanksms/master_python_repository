@@ -157,3 +157,17 @@ def mydeco(func):
         return func(*args, **kwargs)
     return wrapper
 ```
+
+when you see below:
+```python
+import time
+@once_per_n(4)
+def slow_add(a, b):
+    time.sleep(2)
+    return a + b
+```
+you should imagine this
+```python
+slow_add = once_per_n(4)(slow_add)
+
+```
