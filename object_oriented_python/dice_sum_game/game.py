@@ -21,6 +21,8 @@ class Game:
                     print(f'{winners[0]} wins')
                 else:
                     print(f'{winners} win')
+                print(f"{self} ended")
+
                 return
 
 
