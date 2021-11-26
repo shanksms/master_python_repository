@@ -171,3 +171,26 @@ you should imagine this
 slow_add = once_per_n(4)(slow_add)
 
 ```
+### Design patterns
+#### chained comparison
+```python
+x = 5
+if 0 < x < 5:
+    print('x is in between 0 and 5')
+
+if x > 0 and x < 5:
+    print('x is in between 0 and 5')
+```
+#### conditional expression
+```python
+x = 15
+def a():
+    return 10 if x < 5 else 20
+```
+
+#### index and value of a collection
+```python
+ls = [True] * 5
+for index, value in enumerate(ls):
+    print(index, value)
+```
