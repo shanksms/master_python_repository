@@ -222,3 +222,39 @@ Following is printed when you run the above code:
 <class 'int'>
 ```
 What it shows is that even class is derived from and is an object of class 'type' 
+
+
+### Generators
+let's understand how generators are useful with a trivial example. If you run below code, it is most likely to crash due to memory issue:
+```python
+sq_nums = [i**2 for i in range(100000000)]
+for sq_num in sq_nums:
+    print(sq_num)
+```
+The suggested way to achieve the same thing is below:
+```python
+for num in range(100000000):
+    print(num ** 2)
+```
+why above code succeeds? reason is, in the secon case range gives generattor which lazily emits one value at a time. Therefore
+memory footprint is low in the second case.
+<br>
+Below is how you write a simple generator.
+```python
+def squared_number_gen(n):
+    for i in range(n):
+        yield i ** 2
+
+gen = squared_number_gen(100)
+for num in gen:
+    print(num)
+# generators are also iterators, so you could do following as well. In fact that is for loop does internally:
+gen = squared_number_gen(2)
+print(next(gen))
+print(next(gen))
+print(next(gen))
+# Last print statement will throw StopIteration error since generator has reached the end.
+``` 
+In response to first iteration request (when next is called on the generator), it emits i **2 and then stops.
+in response to next iteration request, it again moves to yield statement and emits i**2. When looping is over, the
+generator function returns and StopIterator exception is thrown.
