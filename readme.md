@@ -1,6 +1,7 @@
 # Important python concepts
 ### resources
 [python decorators] (https://www.youtube.com/watch?v=MjHpMCIvwsY)
+[python design patterns] (https://refactoring.guru/design-patterns/python)
 
 ### Why Python is slow compared to compiled languages?
 http://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/
