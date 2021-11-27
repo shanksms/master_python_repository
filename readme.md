@@ -172,7 +172,7 @@ you should imagine this
 slow_add = once_per_n(4)(slow_add)
 
 ```
-### Design patterns
+### Design patterns and pythonic code
 #### chained comparison
 ```python
 x = 5
@@ -195,3 +195,30 @@ ls = [True] * 5
 for index, value in enumerate(ls):
     print(index, value)
 ```
+
+
+### understanding type and meta class
+#### type
+1. Every thing in python is Object (functions, int, str etc)
+2. When you create a class, it is also an Object of type 'type'
+3. type following snippets
+```python
+class Test:
+    pass
+
+def func():
+    pass
+print(type(Test))
+print(type(Test()))
+print(type(func))
+print(type(2))
+
+```
+Following is printed when you run the above code:
+```shell script
+<class 'type'>
+<class '__main__.Test'>
+<class 'function'>
+<class 'int'>
+```
+What it shows is that even class is derived from and is an object of class 'type' 
