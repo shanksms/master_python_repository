@@ -196,6 +196,19 @@ for index, value in enumerate(ls):
     print(index, value)
 ```
 
+#### High cohesion and low coupling
+when a class's attributes and methods are closely related, it is said to have high cohesion. 
+A class is cohesive if its contents make sense together as a whole. We want our classes to have high cohesion because 
+if everything in a class is closely related, our concerns are likely to be well separated. A class with too many
+ concerns has low cohesion because those concerns muddy the intent of the class. 
+ Usually I end up creating a class only when this cohesion is already clear to me; some code already exhibits 
+ relatedness through the data and behaviors it contains.
+
+When a class depends on another class, those classes are said to be coupled.
+If a class depends on many details of another class, such that changing one requires changing the other, 
+those classes are tightly coupled. Tight coupling is expensive because it can lead to spending more time managing 
+the ripple effects of a change. Loose coupling is the desired end state. You’ll learn more strategies for achieving 
+loose coupling in chapter 10.
 
 ### understanding type and meta class
 #### type
@@ -258,3 +271,73 @@ print(next(gen))
 In response to first iteration request (when next is called on the generator), it emits i **2 and then stops.
 in response to next iteration request, it again moves to yield statement and emits i**2. When looping is over, the
 generator function returns and StopIterator exception is thrown.
+
+### python name spaces
+When you first open the Python interpreter, the built-in namespace is populated with all the stuff built into Python. 
+This namespace contains built-in functions like print() and open(). These built-ins have no prefix, and
+you don’t need to do anything special to use them. Python makes them available to you anywhere in your code.
+That’s why the famously easy print('Hello world!') Just Works™ in Python.
+
+Unlike in some languages, you won’t explicitly create namespaces in your Python code, 
+but your code structure will affect what namespaces are created and how they interact.
+As an example, creating a Python module automatically creates an additional namespace for that module. 
+At its simplest, a Python module is a .py file that contains some code. A file named sales_tax.py, for example, 
+is “the sales_tax module”:
+```python
+# sales_tax.py
+
+def add_sales_tax(total, tax_rate):
+    return total * tax_rate
+```
+Each module has a global namespace, which code in the module can access freely. 
+Functions, classes, and variables that aren’t nested inside anything are in the module’s global namespace:
+```python
+# sales_tax.py
+
+TAX_RATES_BY_STATE = {                        
+    'MI': 1.06,
+    # ...
+}
+
+def add_sales_tax(total, state):
+    return total * TAX_RATES_BY_STATE[state]  
+```
+1.  TAX_RATES_BY_STATE is in the module’s global namespace.
+2.  Code in the module can use TAX_RATES_BY_STATE without any fuss.
+
+Functions and classes in a module also have a local namespace that only they can access:
+```python
+# sales_tax.py
+
+TAX_RATES_BY_STATE = {
+    'MI': 1.06,
+    ###
+}
+
+def add_sales_tax(total, state):
+    tax_rate = TAX_RATES_BY_STATE[state]  
+    return total * tax_rate               
+```
+A module that wants to use a variable, function, or class from another module must import it into its global namespace. 
+Importing is a way of pulling a name from somewhere else into the desired namespace.
+```python
+# receipt.py
+
+from sales_tax import add_sales_tax                     
+
+
+def print_receipt():
+    total = ...
+    state = ...
+    print(f'TOTAL: {total}')
+    print(f'AFTER TAX: {add_sales_tax(total, state)}')  
+```
+1 The add_sales_tax function is added to the receipt global namespace.
+2 add_sales_tax still knows about TAX_RATES_BY_STATE and tax_rate from its own namespace.
+So, to refer to a variable, function, or class in Python, one of the following must be true:
+
+The name is in the Python built-in namespace.
+The name is the current module’s global namespace.
+The name is in the current line of code’s local namespace.
+The precedence for conflicting names works in the opposite order: a local name will override a global name, 
+which will override a built-in name. You can remember this because generally the definition most specific to the current code is the one that gets used
