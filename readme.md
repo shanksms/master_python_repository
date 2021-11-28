@@ -210,6 +210,23 @@ those classes are tightly coupled. Tight coupling is expensive because it can le
 the ripple effects of a change. Loose coupling is the desired end state. You’ll learn more strategies for achieving 
 loose coupling in chapter 10.
 
+#### Encapsulation in python
+Most often, encapsulation in Python is done with a class. In classes, functions become methods; methods are similar
+to functions, but they are contained in a class and often receive an input that is either an instance of the class 
+or the class itself.
+
+In Python, modules are also a form of encapsulation. Modules are even higher-level than classes;
+they group multiple related classes and functions together. For example, a module dealing with HTTP interactions 
+could contain classes for requests and responses, as well as utility functions for parsing URLs. Most *.py files you 
+encounter would be considered modules.
+
+The largest encapsulation available in Python is a package. Packages encapsulate related modules into a directory 
+structure. Packages are often distributed on the Python Package Index (PyPI) for others to install and reuse.
+
+Abstraction and encapsulation work together by grouping related functionality together and hiding the parts of it that 
+don’t matter to anyone else. This is sometimes called “information hiding,” and it allows the internals of a class 
+(or system in general) to change rapidly without other code having to change at the same rate.
+
 ### understanding type and meta class
 #### type
 1. Every thing in python is Object (functions, int, str etc)
