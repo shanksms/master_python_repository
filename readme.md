@@ -288,6 +288,13 @@ print(next(gen))
 In response to first iteration request (when next is called on the generator), it emits i **2 and then stops.
 in response to next iteration request, it again moves to yield statement and emits i**2. When looping is over, the
 generator function returns and StopIterator exception is thrown.
+#### generator expressions
+```python
+numbers = [1, 2, 3, 4]
+squares = (n ** 2 for n in numbers)
+for n in squares:
+    print(n)
+```
 
 ### python name spaces
 When you first open the Python interpreter, the built-in namespace is populated with all the stuff built into Python. 
@@ -358,3 +365,12 @@ The name is the current module’s global namespace.
 The name is in the current line of code’s local namespace.
 The precedence for conflicting names works in the opposite order: a local name will override a global name, 
 which will override a built-in name. You can remember this because generally the definition most specific to the current code is the one that gets used
+
+
+### named tuple
+This is how you create named tuples
+```python
+from collections import namedtuple
+Task = namedtuple('Task', ['summary', 'owner', 'done', 'id'])
+Task.__new__.__defaults__ = (None, None, False, None)
+```
