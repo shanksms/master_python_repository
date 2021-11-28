@@ -3,6 +3,7 @@
 ### Resources
 [ pycon datascience testing ] (https://www.youtube.com/watch?v=0ysyWk-ox-8&t=852s)
 [ Writing tests for legacy code] (https://www.youtube.com/watch?v=LDdUuoI_lIg)
+[ datascience testing] (https://www.youtube.com/watch?v=yACtdj1_IxE)
 
 ### Testing loop
 1. Write test for a function
