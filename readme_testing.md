@@ -2,6 +2,7 @@
 
 ### Resources
 [ pycon datascience testing ] (https://www.youtube.com/watch?v=0ysyWk-ox-8&t=852s)
+[ pycon datascience testing git code ] (https://github.com/ericmjl/data-testing-tutorial) 
 [ Writing tests for legacy code] (https://www.youtube.com/watch?v=LDdUuoI_lIg)
 [ datascience testing] (https://www.youtube.com/watch?v=yACtdj1_IxE)
 
