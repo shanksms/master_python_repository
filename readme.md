@@ -224,6 +224,108 @@ for color in sorted(colors, key=len):
     print(color)
 ```
 
+### distinguishing multiple exist points in loop
+else block only executes if for loop completes normally (without break)
+```python
+def find(seq, target):
+    for i, value enumerate(seq):
+        if value == target:
+            break
+    else:
+        return -1
+    return i
+
+```
+
+### looping over dictionary
+```python
+d = {'Mathew': 'blue', 'John': 'purple'}
+# if you dont want to delete whole looping
+for k in d:
+    print(k)
+
+# if you  want to delete whole looping
+for k in d.keys():
+    if k.startswith('M'):
+        del d[k]
+
+# loop over key and value at the same time
+
+for k, v in d.items():
+    print(k, v)
+
+```
+
+### create dictionary from two lists
+```python
+lst1 = ['a', 'b', 'c', 'd', 'b']
+lst2 = [2, 3, 4, 5, 6]
+new_dictionary = {}
+
+for key, value in zip(lst1, lst2):
+    if key in new_dictionary:
+        new_dictionary[key] += value
+    else:
+        new_dictionary[key] = value
+
+print(new_dictionary)
+```
+
+### Counting with dictionary
+```python
+from collections import defaultdict
+colors = ['red', 'blue', 'green', 'red', 'blue', 'green']
+d = defaultdict(int)
+for color in colors:
+    d[color] +=1
+
+```
+### grouping example
+```python
+from collections import defaultdict
+
+
+def group_by_count(ls_of_words):
+    d = defaultdict(list)
+    for word in ls_of_words:
+        key = len(word)
+        d[key].append(word)
+    return d
+if __name__ == '__main__':
+    print(group_by_count(['a', 'b', 'cc', 'ddd']))
+```
+### use key arguments to improve readability
+
+### unpacking sequences
+```python
+p = 'shashank', 35
+name, age = p
+
+```
+
+### updating multiple state variable
+```python
+def fib(n):
+    x, y = 0, 1
+    for i in range(0, n):
+        print(x)
+        x, y = y, x + y
+
+
+```
+
+### updating sequences
+always use dequeue if you need to modify the sequence. Dont use list
+
+### how to open and close files
+```python
+with open('data.txt') as f:
+    data = f.read()
+```
+
+### write docstrings
+both module level docstrings and class level docstring
+
 #### High cohesion and low coupling
 when a class's attributes and methods are closely related, it is said to have high cohesion. 
 A class is cohesive if its contents make sense together as a whole. We want our classes to have high cohesion because 
