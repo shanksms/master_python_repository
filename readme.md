@@ -196,6 +196,34 @@ for index, value in enumerate(ls):
     print(index, value)
 ```
 
+### iterate collection in reverse
+```python
+names = ['John', 'Mark', 'Sandy']
+for name in reversed(names):
+    print(name)
+```
+
+### iterate multiple collection at the same time
+```python
+names = ['John', 'Mark', 'Sandy']
+age = [11, 12 , 10]
+for name, age in zip(names, age):
+    print(','.join([name, age]))
+```
+### iterate collection in a sorted order
+```python
+colors = ['red', 'blue', 'green', 'yellow']
+for color in sorted(colors):
+    print(color)
+
+for color in sorted(colors, reverse=True):
+    print(color)
+
+# Custom sorting
+for color in sorted(colors, key=len):
+    print(color)
+```
+
 #### High cohesion and low coupling
 when a class's attributes and methods are closely related, it is said to have high cohesion. 
 A class is cohesive if its contents make sense together as a whole. We want our classes to have high cohesion because 
