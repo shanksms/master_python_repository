@@ -152,7 +152,9 @@ class Circle:
         self.diameter = 2 * radius
 
 ```
-#### basic data classes
+#### dataclasses
+[dataclasses] (https://towardsdatascience.com/9-reasons-why-you-should-start-using-python-dataclasses-98271adadc66)
+##### basic data classes
 ```python
 from dataclasses import dataclass
 
@@ -162,7 +164,7 @@ class Position:
     lon: float
     lat: float
 ```
-#### immutable data classes
+##### immutable data classes
 ```python
 from dataclasses import dataclass
 
