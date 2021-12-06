@@ -542,3 +542,36 @@ from collections import namedtuple
 Task = namedtuple('Task', ['summary', 'owner', 'done', 'id'])
 Task.__new__.__defaults__ = (None, None, False, None)
 ```
+
+### Python env and dependency management
+#### install a venv 
+```shell script
+pip install virtualenv
+python -m venv modernpython
+cd Scripts 
+#on Windows
+#activate
+acvtivate
+
+#deactivate
+deactivate
+
+# on mac/linux
+source mypython/bin/activate
+```
+
+### Random number generator
+This is how you generate random number
+```python
+from random import random
+from random import seed
+print(random())
+print(random())
+# if you want reproducible result. set seed
+seed(12345)
+print(random())
+print(random())
+seed(12345)
+print(random())
+print(random())
+```
