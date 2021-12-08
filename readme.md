@@ -402,6 +402,13 @@ Abstraction and encapsulation work together by grouping related functionality to
 don’t matter to anyone else. This is sometimes called “information hiding,” and it allows the internals of a class 
 (or system in general) to change rapidly without other code having to change at the same rate.
 
+#### SOLID Principles
+[design principles] (https://fi.ort.edu.uy/innovaportal/file/2032/1/design_principles.pdf)
+
+##### DI
+Dependency Inversion is the strategy of depending upon interfaces or abstract functions and classes, rather than upon concrete functions and classes.
+Check the design_patterns/dependency_inversion in this repository.
+
 ### understanding type and meta class
 #### type
 1. Every thing in python is Object (functions, int, str etc)
