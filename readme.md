@@ -211,6 +211,13 @@ slow_add = once_per_n(4)(slow_add)
 
 ```
 ### Design patterns and pythonic code
+#### checking for None
+```python
+# always use is operator with None
+x = 1
+if x is None:
+    pass
+```
 #### chained comparison
 ```python
 x = 5
@@ -560,7 +567,8 @@ deactivate
 source mypython/bin/activate
 ```
 
-### Random number generator
+### statistics module in python
+#### Random number generator
 This is how you generate random number
 ```python
 from random import random
@@ -574,4 +582,27 @@ print(random())
 seed(12345)
 print(random())
 print(random())
+```
+
+### static code checking and type hints
+
+#### this is how you provide types
+
+```python
+from typing import *
+def a(x:int, y:int) -> int:
+    return x + y
+
+a(1, 2) # this will pass mypy static analysis check
+a(1, 'Hello') # this will not pass mypy static analysis check
+```
+```shell script
+python -m mypy <python file name>
+```
+```python
+from typing import *
+
+def x(x: int, y: Optional[int]=None) -> None:
+    if y is None:
+        y = 
 ```
