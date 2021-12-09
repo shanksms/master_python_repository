@@ -316,6 +316,35 @@ for key, value in zip(lst1, lst2):
 print(new_dictionary)
 ```
 
+### iterate two iterables in parallel even if the length differs
+```python
+from itertools import zip_longest
+
+print(list(zip_longest('abcdef', 'ghijklm'))) # (None, 'm')
+
+```
+### itreate a 2-D list column wise
+```python
+from itertools import zip_longest
+a = [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+# lets say, you want to iterate column wise
+for tup in zip_longest(*a):
+    print(tup)
+```
+### flattening a 2-D list
+```python
+a = [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+
+x = [x for row in a for x in row]
+```
 ### Counting with dictionary
 ```python
 from collections import defaultdict
@@ -370,6 +399,38 @@ with open('data.txt') as f:
 
 ### write docstrings
 both module level docstrings and class level docstring
+
+### use fsum to get accurate floating point sums
+```python
+from math import fsum
+print(fsum([0.1]*10)) # this will print 1.0 
+print(sum([0.1]*10)) # this will print 0.99999
+```
+### floating point divisions
+```python
+print(5/2) # 2.5
+print(5 // 2) # 2
+```
+
+### Default dict skills
+DefaultDict can be used to call a factor method in case a not exist.
+set(), list(), dict() are examples of factory methods
+```python
+from collections import defaultdict
+d = defaultdict(set)
+d['k'].add('value') # d['k'] will retun and empty set and then we can add element in to it
+
+# a real use case of defaultdict. Let us say you want to group names by their first letter
+from pprint import pprint
+names = ['tom', 'jerry', 'john', 'susan', 'tim']
+d = defaultdict(list)
+for name in names:
+    feature = name[0]
+    d[feature].append(name)
+
+pprint(d)
+
+```
 
 #### High cohesion and low coupling
 when a class's attributes and methods are closely related, it is said to have high cohesion. 
