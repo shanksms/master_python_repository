@@ -431,6 +431,15 @@ for name in names:
 pprint(d)
 
 ```
+### itertools module
+#### partial function
+```python
+from functools import partial
+#partial freezes the first argument of the function
+print(pow(2, 5))
+twopow = partial(pow, 2)
+print(twopow(5))
+```
 
 #### High cohesion and low coupling
 when a class's attributes and methods are closely related, it is said to have high cohesion. 
