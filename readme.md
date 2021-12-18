@@ -718,3 +718,12 @@ with open('congress_votes_114-2016_s20.csv', encoding='utf-8') as f:
     for row in reader:
         print(row)
 ```
+
+### glob module to read a directory with given regex
+```python
+from glob import glob
+for filename in glob('congress_data/*.csv'):
+    with open(filename, encoding='utf-8') as f:
+        for line in f.readlines():
+            print(line)
+```
