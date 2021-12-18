@@ -431,6 +431,17 @@ for name in names:
 pprint(d)
 
 ```
+### partially consuming an iterator
+```python
+
+```
+### invert a dictionary
+```python
+e2s = {'one': 'uno', 'two': 'dos', 'three': 'tres'}
+s2e = {v:k for k, v in e2s.items()}
+print(e2s)
+print(s2e)
+```
 ### itertools module
 #### partial function
 ```python
@@ -439,6 +450,13 @@ from functools import partial
 print(pow(2, 5))
 twopow = partial(pow, 2)
 print(twopow(5))
+
+# one more example
+def orderFunc(a,b,c,d):
+      return a*4 + b*3 + c*2 + d
+
+result = partial(orderFunc,a=5,b=6,c=7)
+print(result(d=8))
 ```
 
 #### High cohesion and low coupling
@@ -682,4 +700,21 @@ from typing import *
 def x(x: int, y: Optional[int]=None) -> None:
     if y is None:
         y = 
+```
+
+### assert for checking values
+```python
+assert 5 == 3 + 2
+assert 5 == 3 + 3
+```
+
+### how to read csv file
+```python
+import csv
+
+with open('congress_votes_114-2016_s20.csv', encoding='utf-8') as f:
+    reader = csv.reader(f)
+    next(reader) # this is done to skip the first line (assuming first line is header)
+    for row in reader:
+        print(row)
 ```
