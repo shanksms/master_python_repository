@@ -727,3 +727,88 @@ for filename in glob('congress_data/*.csv'):
         for line in f.readlines():
             print(line)
 ```
+
+### use bisect to search with in the range
+```python
+import bisect
+
+cuts = [60, 70, 80, 90]
+grades = 'FDCBA'
+print(grades[bisect.bisect(cuts, 76)])
+print(grades[bisect.bisect(cuts, 70)])
+scores = [76, 90, 81, 45, 72]
+
+grades_ = [grades[bisect.bisect(cuts, score)] for score in scores]
+print(grades_)
+```
+
+### use heapq.merge to efficiently merge sorted arrays
+```python
+from heapq import merge
+
+a = [5, 10, 15]
+b = [1, 4, 12]
+c = [3, 8, 16]
+# this produces  generator which is also an iterator
+it = merge(a, b, c)
+print(next(it))
+print(next(it))
+
+```
+### use itertools.slice to slice an iterator
+```python
+from itertools import islice
+
+print(list(islice('abcdef', 2, 4)))
+```
+
+### interning to same space
+```python
+import sys
+s = 'he'
+t = 'llo'
+u = 'hello'
+v = s + t
+print(u == v) ##True
+print(u is v) # False
+print(id(u), id(v)) # different ids
+
+# when you use intern, python interpreter checks if there is already same string in the memory.
+# in case there is a string, it does not create a new string.
+# this is useful to reuse user names in the memory
+u = sys.intern('hello')
+v = sys.intern(s + t)
+print(u == v) ##True
+print(u is v) # True
+print(id(u), id(v)) # same ids
+```
+### time module example
+```python
+import time
+time.sleep(10)
+time.time()
+time.ctime()
+```
+
+### hashlib 
+
+```python
+import hashlib
+b = 'a tale of two cities'.encode('utf-8')
+b = hashlib.sha512(b)
+b = hashlib.sha512(b)
+b = hashlib.sha512(b)
+b = hashlib.sha512(b)
+
+# instead do this
+p = 'a tale of two cities'.encode('utf-8')
+h = hashlib.pbkdf2_hmac('sha256', p, 'some phrase'.encode('utf-8'), 10000)
+
+```
+
+### short circuit operation
+```python
+print('hello' and True)
+print(True and 'hello')
+
+```

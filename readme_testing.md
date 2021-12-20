@@ -96,3 +96,18 @@ def test_some_data(some_data):
     """Use fixture return value in a test."""
     assert some_data == 42
 ```
+
+### property based testing.versus example based testing
+[hypothesis testing](https://hypothesis.readthedocs.io/en/latest/quickstart.html)
+example based testing
+1. difficult to maintain
+2. Tedious to write
+3. Some times, lots of repetitions
+4. Too much of detail oriented
+
+property based testing
+1. Focus on high level requirement
+2. properties define behaviour
+3. Randomly generated inputs
+
+
