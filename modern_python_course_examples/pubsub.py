@@ -39,6 +39,15 @@ def posts_for_user(user: User, limit : Optional[int] = None) -> List:
     )
     return list(islice(relevant_posts, limit))
 
+
+def search(search_text: str, limit= None) -> List[Post]:
+    return list(
+        islice(
+            (post for post in posts if search_text in post.text), # gen expression
+            limit)
+    )
+
+
 if __name__ == '__main__':
     post_message(user= 'guido', text= 'i invented python #python')
     time.sleep(1)
@@ -56,4 +65,5 @@ if __name__ == '__main__':
     #print(followed)
     #print(following)
     #pprint(post_by_user('shashank'))
-    pprint(posts_for_user('shashank'))
+    #pprint(posts_for_user('shashank'))
+    pprint(search('fan'))
