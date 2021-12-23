@@ -1,6 +1,7 @@
 import math
+from typing import Tuple
 
-def quadratic(a, b, c):
+def quadratic(a: float, b: float, c: float) -> Tuple[float, float]:
     """ Compute the two roots of the quadratic equation:
         ax^2 + bx + c = 0
         written in python as:
