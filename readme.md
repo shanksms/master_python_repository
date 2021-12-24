@@ -812,3 +812,15 @@ print('hello' and True)
 print(True and 'hello')
 
 ```
+
+### Iterators and Generators
+
+#### How to implement iterator protocol
+1. The __iter__ method, which returns an iterator
+2. The __next__ method, which must be defined on the iterator
+3. The StopIteration exception, which the iterator raises to signal the end of the iterations
+<br>
+The two terms iterable and iterator are very similar but have different meanings:
+1. An iterable object can be put inside a for loop or list comprehension. For something to be iterable,
+ it must implement the __iter__ method. That method should return an iterator.
+2.An iterator is an object that implements the __next__ method.
