@@ -813,6 +813,15 @@ print(True and 'hello')
 
 ```
 
+### get size of any variable
+```python
+import sys
+nums_squared_lc = [num**2 for num in range(5)] # this produces list
+nums_squared_gc = (num**2 for num in range(5)) # this produces generator expression
+sys.getsizeof(nums_squared_gc)
+sys.getsizeof(nums_squared_lc)
+
+```
 ### Iterators and Generators
 
 #### How to implement iterator protocol
@@ -824,3 +833,64 @@ The two terms iterable and iterator are very similar but have different meanings
 1. An iterable object can be put inside a for loop or list comprehension. For something to be iterable,
  it must implement the __iter__ method. That method should return an iterator.
 2.An iterator is an object that implements the __next__ method.
+
+### generators
+Introduced with PEP 255, generator functions are a special kind of function that return a lazy iterator. 
+These are objects that you can loop over like a list. However, unlike lists, lazy iterators do not store their contents
+in memory. 
+When you call a generator function or use a generator expression, you return a special iterator called a generator. 
+You can assign this generator to a variable in order to use it. When you call special methods on the generator, such
+as next(), the code within the function is executed up to yield.
+When the Python yield statement is hit, the program suspends function execution and returns the yielded value to the
+caller. (In contrast, return stops function execution completely.) When a function is suspended, the state of that 
+function is saved. This includes any variable bindings local to the generator, the instruction pointer, the internal 
+stack, and any exception handling.
+This allows you to resume function execution whenever you call one of the generator’s methods. In this way, all function evaluation picks back up right after yield
+Let us say, you want to write a program to count lines  of a very large file. There are two ways to do it
+```python
+def csv_reader(file_name):
+    file = open(file_name)
+    result = file.read().split("\n")
+    return result
+
+csv_gen = csv_reader("some_csv.txt")
+row_count = 0
+for row in csv_gen:
+    row_count += 1
+
+print(f"Row count is {row_count}")
+```
+Above code will throw out of memory error if file size is very large. The reaon is: file.read().split("\n") puts the lines
+in a list.
+Below is a better option
+```python
+def csv_reader(file_name):
+    for row in open(file_name, "r"):
+        yield row
+
+csv_gen = csv_reader("some_csv.txt")
+row_count = 0
+for row in csv_gen:
+    row_count += 1
+
+print(f"Row count is {row_count}")
+```
+
+#### generate infinite sequence using generators
+```python
+import time
+def infinite_sequence(start_counter = 1):
+    while True:
+        yield start_counter
+        start_counter += 1
+
+for i in infinite_sequence():
+    print(i)
+    time.sleep(1)
+```
+
+#### generator expression
+```python
+nums_squared_lc = [num**2 for num in range(5)] # this produces list
+nums_squared_gc = (num**2 for num in range(5)) # this produces generator expression
+```

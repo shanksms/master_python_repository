@@ -1,5 +1,4 @@
-
-class MyEnumerate():
+class MyEnumerate:
     def __init__(self, data, start_index=0):
         self.data = data
         self.index = 0
@@ -16,7 +15,8 @@ class MyEnumerate():
         self.start_index += 1
         return value
 
-class MyEnumerateWithDelegatedIterator():
+
+class MyEnumerateWithDelegatedIterator:
     def __init__(self, data, start_index=0):
         self.data = data
         self.index = 0
@@ -26,13 +26,11 @@ class MyEnumerateWithDelegatedIterator():
         return MyIterator(self.data, self.start_index)
 
 
-
-
-class MyIterator():
+class MyIterator:
     def __init__(self, data, start_index=0):
         self.data = data
         self.index = 0
-        self.start_index=start_index
+        self.start_index = start_index
 
     def __next__(self):
         if self.index >= len(self.data):
@@ -43,7 +41,7 @@ class MyIterator():
         return value
 
 
-class MyEnumerateGenerator():
+class MyEnumerateGenerator:
     def __init__(self, data, start_index=0):
         self.data = data
         self.index = 0
@@ -55,8 +53,6 @@ class MyEnumerateGenerator():
             self.index += 1
             self.start_index += 1
             yield value
-
-
 
 
 if __name__ == '__main__':
