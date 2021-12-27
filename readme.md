@@ -656,6 +656,32 @@ print(a) # this will print 2
 
 ```
 
+### * operator in python
+run the following code
+```python
+def toy1(x, y, z):
+    print(x, y, z)
+def toy2(*args):
+    print(args)
+    print(type(args))
+a = [1, 2, 3]
+print(a)
+toy1(*a)
+toy2(*a)
+print('done')
+```
+it will print following:
+<br>
+[1, 2, 3]
+<br>
+1 2 3
+<br>
+(1, 2, 3)
+<br>
+<class 'tuple'>
+<br>
+done
+
 ### named tuple
 This is how you create named tuples
 ```python
