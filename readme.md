@@ -99,6 +99,14 @@ class Condition(Enum):
     OK = 2
 ```
 
+### return defualt value from dictionary
+```python
+_map = {'a': 'b'}
+_map['c'] # this will throw error
+_map.get('c', None) # this will return None
+
+```
+
 ### dunder magic methods
 1. functions, methods, modules that start with __ and end with __
 2. meant to be called indirectly. e.g. n1.__add__(n2) gets called on n1 + n2
@@ -636,6 +644,17 @@ The name is in the current line of code’s local namespace.
 The precedence for conflicting names works in the opposite order: a local name will override a global name, 
 which will override a built-in name. You can remember this because generally the definition most specific to the current code is the one that gets used
 
+### refer a module's global name space variable in a function
+```python
+a = 1
+def fn():
+    global a
+    a = 2
+
+fn()
+print(a) # this will print 2
+
+```
 
 ### named tuple
 This is how you create named tuples
@@ -718,8 +737,8 @@ with open('congress_votes_114-2016_s20.csv', encoding='utf-8') as f:
     for row in reader:
         print(row)
 ```
-
-### glob module to read a directory with given regex
+### File related operations
+#### glob module to read a directory with given regex
 ```python
 from glob import glob
 for filename in glob('congress_data/*.csv'):
@@ -728,6 +747,16 @@ for filename in glob('congress_data/*.csv'):
             print(line)
 ```
 
+#### os.listdir and path module
+```python
+import os
+# to list all the files in a directory. Please note, it only gives file names (not the full file path)
+path = '/etc'
+# to make full path, you should use path
+for filename in os.listdir(path):
+     full_filename = os.path.join(path, filename)  
+
+```
 ### use bisect to search with in the range
 ```python
 import bisect
