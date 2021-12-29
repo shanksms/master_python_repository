@@ -215,8 +215,22 @@ def slow_add(a, b):
 ```
 you should imagine this
 ```python
+import time
 slow_add = once_per_n(4)(slow_add)
 
+def once_per_n(n):
+    def middle(func):
+        last_invoked = 0
+
+        def wrapper(*args, **kwargs):
+            nonlocal last_invoked
+            if time.time() - last_invoked < n:
+                raise Exception('called too often')
+            last_invoked = time.time()
+            return func(*args, **kwargs)
+
+        return wrapper
+    return middle
 ```
 ### Design patterns and pythonic code
 #### checking for None
