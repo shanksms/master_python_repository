@@ -99,6 +99,35 @@ class Condition(Enum):
     OK = 2
 ```
 
+### Functional Programming 
+
+#### What are higher order functions
+Functions which accept other functions in their parameter list
+
+
+### Functional Programming  - ends
+
+### runtime.txt and requirements.txt
+runtime.txt specifies what version of python is used
+requirements.txt specifies all the library dependencies
+### Simple word count program
+```python
+from collections import Counter
+from operator import itemgetter
+
+def top_words_by_count(words, k=1):
+    counter = Counter(words)
+    word_count_list = []
+    for key in counter:
+        word_count_list.append((key, counter[key]))
+    print(word_count_list)
+
+    #sorted_wc_list = sorted(word_count_list, key= lambda word_count_tup : word_count_tup[1], reverse=True)
+    sorted_wc_list = sorted(word_count_list, key= itemgetter(1), reverse=True)
+
+    return sorted_wc_list[:k]
+```
+
 ### return defualt value from dictionary
 ```python
 _map = {'a': 'b'}
