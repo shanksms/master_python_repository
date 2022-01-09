@@ -46,6 +46,7 @@ default_arg_example()
 
 ```
 
+#### When you write getter and setter, use correct convention e.g. get_* and set_*
 
 ### Coding standards - ends
 
