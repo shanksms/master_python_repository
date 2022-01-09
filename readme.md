@@ -9,6 +9,43 @@ http://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/
 
 
 ### Coding standards
+#### import module, not what is inside module. This enhances the readability
+```python
+import math # This is good
+from math import sqrt # This is not
+```
+#### Guard your module from getting executed accidently
+```python
+if __name__ == '__main__':
+    pass
+    #call function in the module
+```
+
+#### don't make List and dict comprehension expression complicated
+
+#### Don't use mutable python objects as default arguments
+default arguments are evaluated once at module load times. They may cause issue in some cases.
+dont don this:
+```python
+def default_arg_example(x=[]):
+    x.append(1)
+    print(x)
+default_arg_example()
+default_arg_example()
+# this will print[1] and [1, 1]
+```
+instead do this:
+```python
+def default_arg_example(x=None):
+    if not x:
+        x = []
+    x.append(1)
+    print(x)
+default_arg_example()
+default_arg_example()
+
+```
+
 
 ### Coding standards - ends
 
