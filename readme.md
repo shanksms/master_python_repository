@@ -2,9 +2,15 @@
 ### resources
 [python decorators] (https://www.youtube.com/watch?v=MjHpMCIvwsY)
 [python design patterns] (https://refactoring.guru/design-patterns/python)
+[google style guide] (https://google.github.io/styleguide/pyguide.html)
 
 ### Why Python is slow compared to compiled languages?
 http://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/
+
+
+### Coding standards
+
+### Coding standards - ends
 
 ### What is raw string in python
 backslash in python is used as a escape character. 
