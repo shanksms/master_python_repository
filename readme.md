@@ -3,6 +3,7 @@
 [python decorators] (https://www.youtube.com/watch?v=MjHpMCIvwsY)
 [python design patterns] (https://refactoring.guru/design-patterns/python)
 [google style guide] (https://google.github.io/styleguide/pyguide.html)
+[slice notation] (https://stackoverflow.com/questions/509211/understanding-slice-notation)
 
 ### Why Python is slow compared to compiled languages?
 http://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/
