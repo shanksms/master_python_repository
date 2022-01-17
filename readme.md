@@ -51,6 +51,37 @@ default_arg_example()
 
 ### Coding standards - ends
 
+### python heap module
+#### creating a min heap of custom objects:
+```python
+import heapq
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+    def __repr__(self):
+        return f'Person({self.name})'
+
+    def __lt__(self, other):
+        return len(self.name) < len(other.name)
+
+
+if __name__ == '__main__':
+    p1 = Person('Shashank')
+    p2 = Person('Shreyansh')
+    p3 = Person('Pooja')
+
+    min_heap = []
+    heapq.heappush(min_heap, p1)
+    heapq.heappush(min_heap, p2)
+    heapq.heappush(min_heap, p3)
+
+    while min_heap:
+        print(heapq.heappop(min_heap))
+
+```
+### python heap module -- ends
+
 ### What is raw string in python
 backslash in python is used as a escape character. 
 Sometimes, particularly when dealing with strings such as Windows filesystem paths 
