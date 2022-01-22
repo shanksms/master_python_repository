@@ -25,7 +25,9 @@ def assign_data(centroids: Sequence[Centroid], data: Iterable[Point]) ->Dict[Cen
     """Group the data points closest to centroid"""
     d = defaultdict(list)
     for point in data:
+        # following two lines will give exact result
         closest_centroid = min(centroids, key=partial(dist, point))
+        # closest_centroid = min(centroids, key=lambda other_point: dist(point, other_point))
         d[closest_centroid].append(point)
     return dict(d)
 

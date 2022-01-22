@@ -842,6 +842,17 @@ seed(12345)
 print(random())
 print(random())
 ```
+#### choice, choices and sample
+choice --> pick one
+choices --> pick many with replacement
+sample --> pick many with replacement
+<br>
+Let's say you have lottery numbers ranging from 1 to 60. You would like to choose 6 winner numbers 
+```python
+import random
+sorted(random.sample(range(1, 57), k=6))
+```
+### statistics module in python - ends
 
 ### static code checking and type hints
 
