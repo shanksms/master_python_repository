@@ -1130,3 +1130,20 @@ def is_even(x):
      return x % 2 == 0
 callable(is_even)
 ```
+
+#### *args and **kwargs
+One of the most common uses of *args and **kwargs is to use them in combination to forward all arguments of one function to another.
+For example, suppose we define a function for tracing the arguments and return values of other functions. 
+We pass the function whose execution is to be traced as one argument, but that function could itself take any arguments whatsoever. 
+We can use extended parameter syntax to accept any arguments to our tracing function and extended call syntax to pass those arguments to the traced function:
+```python
+def trace(f, *args, **kwargs):
+    print("args =", args)
+    print("kwargs =", kwargs)
+    result = f(*args, **kwargs)
+    print("result =", result)
+    return result
+
+trace(int, "ff", base=16)
+
+```
