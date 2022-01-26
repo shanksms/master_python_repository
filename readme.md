@@ -1079,3 +1079,23 @@ for i in infinite_sequence():
 nums_squared_lc = [num**2 for num in range(5)] # this produces list
 nums_squared_gc = (num**2 for num in range(5)) # this produces generator expression
 ```
+
+#### getattr in python
+It allows you to dynamically connect with objects based on your input. it is useful when dealing with custom obejcts and modules
+```python
+class A:
+    def foo(self):
+        print('in foo')
+    def bar(self):
+        print('in bar')
+obj = A()
+# you can not do this
+for x in ['foo', 'bar']:
+    obj.x()
+
+# But you can do this
+for x in ['foo', 'bar']:
+    getattr(obj, x)()
+
+
+```
