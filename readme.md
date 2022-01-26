@@ -1017,7 +1017,13 @@ sys.getsizeof(nums_squared_lc)
 The two terms iterable and iterator are very similar but have different meanings:
 1. An iterable object can be put inside a for loop or list comprehension. For something to be iterable,
  it must implement the __iter__ method. That method should return an iterator.
-2.An iterator is an object that implements the __next__ method.
+<br>
+2. An iterator is an object that implements the __next__ method.
+<br>
+3. An iterator is also an iterable. Which means you can pass an iterator to iter() and it will return itself:
+<br>
+[Trey Hunner on iterator] (https://treyhunner.com/2016/12/python-iterator-protocol-how-for-loops-work)
+
 
 ### generators
 Introduced with PEP 255, generator functions are a special kind of function that return a lazy iterator. 
