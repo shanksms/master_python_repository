@@ -1099,3 +1099,28 @@ for x in ['foo', 'bar']:
 
 
 ```
+
+#### callable instances.
+```python
+import socket
+
+
+class Resolver:
+
+    def __init__(self):
+        self._cache = {}
+
+    def __call__(self, host):
+        if host not in self._cache:
+            self._cache[host] = socket.gethostbyname(host)
+        return self._cache[host]
+resolve = Resolver()
+resolve('sixty-north.com') ## syntactic sugar for resolve.__call__('sixty-north.com')
+```
+#### check for callable
+To determine whether an object (including functions) is a callable or not:
+```python
+def is_even(x):
+     return x % 2 == 0
+callable(is_even)
+```
