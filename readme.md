@@ -1147,3 +1147,10 @@ def trace(f, *args, **kwargs):
 trace(int, "ff", base=16)
 
 ```
+
+#### python scoping rules
+L  
+E  
+G  
+B  
+first the Local scope is checked, then any Enclosing scope, next the Global scope, and finally the Builtin scope.
