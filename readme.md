@@ -1154,3 +1154,88 @@ E
 G  
 B  
 first the Local scope is checked, then any Enclosing scope, next the Global scope, and finally the Builtin scope.
+
+
+### closures
+#### local function
+when you define a function inside a function, it is called local funciton.
+```python
+def enclosing():
+    def local_fn():
+        print('local fn')
+    return local_fn
+``` 
+local functions are defined on each call of the enclosing function. just like module level functions, definitions of local  
+functions happen at the run time. Also, each time enclosing function is called, a new local function definition is bound.  
+it is akin to creating a local variable in the enclosing function.
+```shell script
+>>> lf1 = enclosing()
+>>> lf2 = enclosing()
+>>> lf3 = enclosing()
+>>> lf1
+<function enclosing.<locals>.local_func at 0x10a38ec10>
+>>> lf2
+<function enclosing.<locals>.local_func at 0x10a38ed30>
+>>> lf3
+<function enclosing.<locals>.local_func at 0x10a38ef70>
+```
+#### closure
+When a local function uses any variable from the enclosing function, it turns in to a closure.
+```python
+def enclosing():
+    x = 'closed over'
+    def local_fn():
+        print(x)
+    return local_fn
+``` 
+```shell script
+>>> lf = enclosing()
+>>> lf()
+closed over
+>>> lf.__closure__
+(<cell at 0x10220f2f0: str object at 0x1021f8bb0>,)
+```
+A very common use for closures is in function factories. These factories are functions that return other functions,  
+where the returned functions are specialized in some way based on arguments to the factory. In other words, the factory  
+function takes some arguments. It then creates a local function which takes its own arguments but also uses the arguments
+passed to the factory. The combination of runtime function definition and closures makes this possible.
+#### nonlocal keyword
+When you make a name binding (e.g. x = 8) in a function (assuming x already exists as at global level or module level)  
+you are actually creating a new name binding.
+```python
+message = 'global'
+
+def enclosing():
+    message = 'enclosing'
+
+    def local():
+        message = 'local'
+```
+lets say you want to refer to the global x,  then you will redefine x as global x.  
+But, lets say if you want to refer to enclosing varibale in the local function (local() in this case)  
+you have to redefine x as nonlocal x
+ ```python
+message = 'global'
+
+def enclosing():
+    message = 'enclosing'
+
+    def local():
+        nonlocal message
+        message = 'local'
+
+    print('enclosing message:', message)
+    local()
+    print('enclosing message:', message)
+
+print('global message:', message)
+enclosing()
+print('global message:', message)
+```
+```shell script
+global message: global
+enclosing message: enclosing
+enclosing message: local
+global message: global
+```
+### closures - ends
