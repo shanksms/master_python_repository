@@ -337,6 +337,67 @@ def once_per_n(n):
         return wrapper
     return middle
 ```
+#### maintain meta data of the decorated function.
+Take below code and try to print __name__ and __doc__ meta data
+```python
+def a():
+    """
+    dummy fucntion
+    """
+    print('in a')
+```
+```shell script
+a.__name__
+'a'
+a.__doc__
+'\n    dummy fucntion\n    '
+```
+Now lets try to print __name__ and __doc__ of a decorated function
+```python
+def noop(f):
+    def noop_wrapper():
+        return f()
+    #noop_wrapper.__name__ = f.__name__
+    #noop_wrapper.__doc__ = f.__doc__
+    return noop_wrapper
+
+@noop
+def hello():
+    "Print a well-known message."
+    print('hello world!')
+```
+they dont print any thing meaningful
+```shell script
+>>> hello.__name__
+'noop_wrapper'
+>>> hello.__doc__
+>>>
+```
+This is where funtools.wraps comes in handy.
+```python
+import functools
+def noop(f):
+    @functools.wraps(f)
+    def noop_wrapper():
+        return f()
+
+    return noop_wrapper
+```
+```shell script
+>>> help(hello)
+Help on function hello in module __main__:
+
+hello()
+    Print a well-known message.
+
+>>> hello.__name__
+'hello'
+>>> hello.__doc__
+'Print a well-known message.'
+```
+
+### decorators -ends
+
 ### Design patterns and pythonic code
 #### checking for None
 ```python
