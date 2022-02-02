@@ -1300,3 +1300,10 @@ enclosing message: local
 global message: global
 ```
 ### closures - ends
+
+### colections protocols
+1. The container protocol, which allows us to test for item membership in a collection.
+2. The sized protocol, which allows us to determine the number of items in a collection.
+3. The iterable protocol which yield the items in the collection one by one. We encountered the iterable protocol previously in chapter 7. Here we’ll utilise that knowledge directly.
+4. The sequence protocol which supports random read access to collections.
+5. The set protocol which support various set operations such as set-intersection.
