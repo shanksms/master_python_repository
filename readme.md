@@ -1307,3 +1307,12 @@ global message: global
 3. The iterable protocol which yield the items in the collection one by one. We encountered the iterable protocol previously in chapter 7. Here we’ll utilise that knowledge directly.
 4. The sequence protocol which supports random read access to collections.
 5. The set protocol which support various set operations such as set-intersection.
+
+
+### inf in python
+```python
+import math
+a = math.inf
+b = -math.inf
+
+```
