@@ -1316,3 +1316,19 @@ a = math.inf
 b = -math.inf
 
 ```
+
+### Object Oriented programming
+#### Make an abstract class
+```python
+from abc import ABC, abstractmethod
+class Employee(ABC):
+    name: str
+    id: str
+    
+    @abstractmethod
+    def compute_pay(self) -> float:
+        
+
+class HourlyEmployee(Employee):
+    pass
+```
