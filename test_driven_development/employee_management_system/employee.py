@@ -15,7 +15,9 @@ class Employee:
         """
         Compute how much employee is paid
         """
-        payout = self.pay_rate * self.hours_worked
+        payout = self.pay_rate * self.hours_worked + self.employer_cost
+        if self.has_commission:
+            payout += self.commission * self.contracts_landed
         return payout
 
 
