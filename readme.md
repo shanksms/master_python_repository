@@ -1217,6 +1217,18 @@ B
 first the Local scope is checked, then any Enclosing scope, next the Global scope, and finally the Builtin scope.
 
 
+### First order function
+First order functions are those functions which can return functions.
+In following example, enclosing is a first order function.
+```python
+def enclosing():
+    def local_func():
+        print('local func')
+        return local_func
+
+lf = enclosing()
+lf()
+```
 ### closures
 #### local function
 when you define a function inside a function, it is called local funciton.
@@ -1240,6 +1252,12 @@ it is akin to creating a local variable in the enclosing function.
 >>> lf3
 <function enclosing.<locals>.local_func at 0x10a38ef70>
 ```
+As you can see that local function can be returned from their defining scope (in above case enclosing() is the defining scope) and used (invoked ) in another scope.  
+This raises an important question, how does a local function use bindings to objects defined in a scope which no longer exist? That is once a local function is returned from its    
+enclosing scope, that enclosing scope is gone, along with any local object it defined. How can the local function operate with out that enclosing scope?  
+The answer is: local function along with the object defined in the enclosing function, forms a closure.
+Closure essentially remembers the local objects from the enclosing scope that local function needs. 
+
 #### closure
 When a local function uses any variable from the enclosing function, it turns in to a closure.
 ```python
@@ -1256,10 +1274,26 @@ closed over
 >>> lf.__closure__
 (<cell at 0x10220f2f0: str object at 0x1021f8bb0>,)
 ```
-A very common use for closures is in function factories. These factories are functions that return other functions,  
+A very common use for closures is in function factories. These factories are functions that return other functions,    
 where the returned functions are specialized in some way based on arguments to the factory. In other words, the factory  
-function takes some arguments. It then creates a local function which takes its own arguments but also uses the arguments
-passed to the factory. The combination of runtime function definition and closures makes this possible.
+function takes some arguments. It then creates a local function which takes its own arguments but also uses the arguments  
+passed to the factory. The combination of runtime function definition and closures makes this possible.  
+```python
+import math
+
+def raise_to(exp):
+    def raise_to_exp(x):
+        return math.pow(x, exp)
+    return raise_to_exp
+
+square = raise_to(2)
+cube = raise_to(3)
+
+print(square(5))
+print(cube(5))
+```
+
+
 #### nonlocal keyword
 When you make a name binding (e.g. x = 8) in a function (assuming x already exists as at global level or module level)  
 you are actually creating a new name binding.
