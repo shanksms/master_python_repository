@@ -1366,3 +1366,48 @@ class Employee(ABC):
 class HourlyEmployee(Employee):
     pass
 ```
+
+### Python design patters
+#### set operations
+Following examples are from mastering python book by Rick Van.  
+Some sample set examples:
+![](images/set_operations.PNG)
+Lets understand few operations with code examples:
+```python
+current_users = set(('a', 'b', 'd'))
+new_users = set(('b', 'c', 'd', 'c'))
+to_insert = new_users - current_users
+to_delete = current_users - new_users
+unchanged = new_users & current_users
+
+```
+```shell script
+>>>to_insert
+{'c'}
+>>>to_delete
+{'a'}
+>>>unchanged
+{'d', 'b'}
+```
+
+#### Chainmap
+Combining multiple scopes with ChainMap
+Introduced in Python 3.3, ChainMap allows you to combine multiple mappings (dictionaries, for example) into one. 
+This is especially useful when combining multiple contexts. For example, when looking for a variable in your current scope,  
+by default, Python will search in locals(), globals(), and, lastly, builtins.  
+ 
+
+```python
+import builtins
+import collections
+
+key = 'something to search for'
+
+mappings = collections.ChainMap(locals(), globals(), builtins)
+
+print(mappings[key])
+```
+
+
+
+
