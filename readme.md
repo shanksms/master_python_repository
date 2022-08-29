@@ -1407,6 +1407,69 @@ mappings = collections.ChainMap(locals(), globals(), builtins)
 
 print(mappings[key])
 ```
+#### Sorting collections using heapq
+The heapq module is a great little module that makes it very easy to create a priority queue in Python.  
+It is a data structure that will always make the smallest (or largest, depending on the implementation) item available with minimum effort.  
+The API is quite simple, and one of the best examples of its usage can be seen in the OrderedDict object. While you might not need it often,  
+it is a very useful structure if you need it. And understanding the inner workings is important if you wish to understand the workings of classes such as OrderedDict.  
+
+```python
+import heapq
+heap = [1, 3, 5, 7, 2, 4, 3]
+heapq.heapify(heap)
+```
+```shell script
+>>>heap
+[1, 2, 3, 7, 3, 4, 5]
+>>> while heap:
+...     heapq.heappop(heap), heap
+(1, [2, 3, 3, 7, 5, 4])
+(2, [3, 3, 4, 7, 5])
+(3, [3, 5, 4, 7])
+(3, [4, 5, 7])
+(4, [5, 7])
+(5, [7])
+(7, [])
+```
+heapq does not create any special object. it consists of few useful methods which is used to treat regular list as heap.  
+The really confusing part, at first glance, is the sort order. The array is actually sorted but not as a list; it is sorted as a tree.  
+To illustrate this, take a look at the following tree, which shows how the tree is supposed to be read:  
+![](images/tree.PNG)
+
+#### Searching through sorted collections using bisect
+The bisect module inserts items in an object in such a way that they stay sorted and are easily searchable. If your primary purpose is searching, then bisect should be your choice. If you’re modifying your collection a lot, heapq might be better for you.
+
+As is the case with heapq, bisect does not really create a special data structure. The bisect module expects a list and expects that list to always be sorted. It is important to understand the performance implications of this. While appending items to a list has O(1) time complexity, inserting has O(n) time complexity, making it a very heavy operation. Effectively, creating a sorted list using bisect takes O(n*n), which is quite slow, especially because creating the same sorted list using heapq or sorted() takes O(n*log(n)) instead.
+
+If you have a sorted structure and you only need to add a single item, then the bisect algorithm can be used for insertion. Otherwise, it’s generally faster to simply append the items and call list.sort() or sorted() afterward.
+
+To illustrate, we have these lines:
+```shell script
+>>> import bisect
+
+# Using the regular sort:
+>>> sorted_list = []
+>>> sorted_list.append(5)  # O(1)
+>>> sorted_list.append(3)  # O(1)
+>>> sorted_list.append(1)  # O(1)
+>>> sorted_list.append(2)  # O(1)
+>>> sorted_list.sort()  # O(n * log(n)) = 4 * log(4) = 8
+>>> sorted_list
+[1, 2, 3, 5]
+
+# Using bisect:
+>>> sorted_list = []
+>>> bisect.insort(sorted_list, 5)  # O(n) = 1
+>>> bisect.insort(sorted_list, 3)  # O(n) = 2
+>>> bisect.insort(sorted_list, 1)  # O(n) = 3
+>>> bisect.insort(sorted_list, 2)  # O(n) = 4
+>>> sorted_list
+[1, 2, 3, 5]
+```
+
+For a small number of items, the difference is negligible, but the number of operations needed to sort using bisect quickly grows to a point where the difference will be large.  
+For n=4, the difference is just between 4 * 1 + 8 = 12 and 1 + 2 + 3 + 4 = 10, making the bisect solution faster. But if we were to insert 1,000 items, it would be 1000 + 1000 * log(1000) = 10966  
+versus 1 + 2 + … 1000 = 1000 * (1000 + 1) / 2 = 500500. So, be very careful while inserting many items.  
 
 
 
