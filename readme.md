@@ -649,7 +649,7 @@ s2e = {v:k for k, v in e2s.items()}
 print(e2s)
 print(s2e)
 ```
-### itertools module
+### itertools and functools module
 #### partial function
 ```python
 from functools import partial
@@ -694,6 +694,96 @@ print(reduce(operator.mul, list(range(1, 5))))
 ```
 Using the form a, *b = c, we can split an iterable between the first item and the remaining ones. Which means that a, *b = [1, 2, 3] will result in a=1, b=[2, 3].
 
+#### accumulate
+it is similar to reduce but it also returns intermediate results.
+```shell script
+>>> import operator
+>>> import itertools
+
+# Sales per month
+>>> months = [10, 8, 5, 7, 12, 10, 5, 8, 15, 3, 4, 2]
+>>> list(itertools.accumulate(months, operator.add))
+[10, 18, 23, 30, 42, 52, 57, 65, 80, 83, 87, 89]
+```
+#### Chain
+The chain function is a simple but useful function that combines the results of multiple iterators. Very simple but also very useful if you have multiple lists, iterators, and so on—just combine them with a simple chain:  
+```shell script
+>>> import itertools
+
+>>> a = range(3)
+>>> b = range(5)
+>>> list(itertools.chain(a, b))
+[0, 1, 2, 0, 1, 2, 3, 4]
+```
+
+ if you have an iterable containing iterables, the easiest method is to use itertools.chain.from_iterable. The usage is as you would expect:  
+ ```shell script
+>>> import itertools
+
+>>> iterables = [range(3), range(5)]
+>>> list(itertools.chain.from_iterable(iterables))
+[0, 1, 2, 0, 1, 2, 3, 4]
+```
+
+#### dropwhile/takewhile
+The dropwhile function will drop all results until a given predicate evaluates to true. This can be useful if you are waiting for a device to finally return an expected result.  
+That’s a bit difficult to demonstrate in a book, so we only have an example with the basic usage—waiting for a number greater than 3:  
+```shell script
+>>> import itertools
+
+>>> list(itertools.dropwhile(lambda x: x <= 3, [1, 3, 5, 4, 2]))
+[5, 4, 2]
+```
+
+#### count
+The count function is quite similar to the range function, but there are two significant differences:  
+
+The first is that this range is infinite, so don’t even try to do list(itertools.count()). You’ll definitely run out of memory immediately and it might even freeze your system.  
+The second difference is that, unlike the range function, you can actually use floating-point numbers here, so there is no need for whole/integer numbers.  
+```shell script
+>>> import itertools
+
+>>> list(itertools.islice(itertools.count(), 10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+>>> list(itertools.islice(itertools.count(), 5, 10, 2))
+[5, 7, 9]
+
+>>> list(itertools.islice(itertools.count(10, 2.5), 5))
+[10, 12.5, 15.0, 17.5, 20.0]
+```
+
+
+#### group by
+lets group by list of words by the first character
+```python
+from collections import defaultdict
+
+words = ['aa', 'ab', 'ba', 'bb', 'ca', 'cb', 'cc']
+groups = defaultdict(list)
+
+for word in words:
+    groups[word[0]].append(word)
+
+print(groups)
+```
+
+same thing can be achieved by group by function
+```shell script
+>>> import operator
+>>> import itertools
+
+>>> words = ['aa', 'ab', 'ba', 'bb', 'ca', 'cb', 'cc']
+
+# Gets the first element from the iterable
+>>> getter = operator.itemgetter(0)
+
+>>> for group, items in itertools.groupby(words, key=getter):
+...     print(f'group: {group}, items: {list(items)}')
+group: a, items: ['aa', 'ab']
+group: b, items: ['ba', 'bb']
+group: c, items: ['ca', 'cb', 'cc']
+```
 
 #### High cohesion and low coupling
 when a class's attributes and methods are closely related, it is said to have high cohesion. 

@@ -111,3 +111,27 @@ property based testing
 3. Randomly generated inputs
 
 
+### doc test
+The doctest module is one of the most useful modules within Python. It allows you to combine documenting your code with tests to make sure that it keeps working as it is supposed to.  
+```python
+def square(n: int) -> int:
+    '''
+
+    >>> square(2)
+    4
+    >>> square(3)
+    9
+    >>> square('x')
+    Traceback (most recent call last):
+    TypeError: can't multiply sequence by non-int of type 'str'
+    '''
+    return n * n
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
+
+```
+Perhaps you have noticed from the preceding examples that the syntax is very similar to the regular Python console, and that is because it is. The doctest input is nothing more than the output of  
+a regular Python shell session. This is what makes testing with this module so intuitive; simply write the code in the Python console and copy the output into a docstring to get tests. Here is an example:  
+
