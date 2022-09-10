@@ -1471,6 +1471,19 @@ For a small number of items, the difference is negligible, but the number of ope
 For n=4, the difference is just between 4 * 1 + 8 = 12 and 1 + 2 + 3 + 4 = 10, making the bisect solution faster. But if we were to insert 1,000 items, it would be 1000 + 1000 * log(1000) = 10966  
 versus 1 + 2 + … 1000 = 1000 * (1000 + 1) / 2 = 500500. So, be very careful while inserting many items.  
 
+#### dict union operator
+This is not actually a separate advanced collection, but it is advanced usage of the dict collection. Since Python 3.9,  
+we have a few easy options for combining multiple dict instances. The “old” solution was to use dict.update(), possibly combined with dict.copy()  
+to create a new instance. While that works fine, it is rather verbose and a tad clunky.
+
+Since this is a case where a few examples are much more useful than just explanation, let’s see how the old solution works:  
+```shell script
+>>> a = dict(x=1, y=2)
+>>> b = dict(y=1, z=2)
+
+>>> a | b
+{'x': 1, 'y': 1, 'z': 2}
+```
 
 
 
