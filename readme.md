@@ -176,7 +176,26 @@ class Condition(Enum):
 ```
 
 ### Functional Programming 
+#### What is functional programming
+In functional programming, computation is only performed using the function arguments as inputs and output of the function
+is a new variable which is created without mutating any of the input variables.   
+Following is a purely functional function:
+```python
+def a(items, v):
+    return items + [v]
+```
+Following is an example of regular function
+```python
+def b(items, v):
+    return items.append(v)
+```
+1. One major advantage of writing purely functional code is that it becomes trivially easy to run in parallel. Because there are no external variables needed and no external variables changed, you can easily parallelize the code to run on multiple processors or even on multiple machines. Assuming you can easily transfer the input variables and output results, of course.  
 
+2. Because the functions are self-contained and don’t have any side effects, they mitigate several kinds of bugs. Mutating function arguments in-place, for example, is a great source of bugs. Additionally, a seemingly useless function call that modifies a variable in the parent scope couldn’t exist in a purely functional codebase.  
+
+3. It makes testing much easier. If a function only has a given input and output and does not touch anything outside of those, you can test without having to set up an entire environment for that function. It also omits the need for sandboxing functions while testing them.
+
+ 
 #### What are higher order functions
 Functions which accept other functions in their parameter list
 
@@ -646,6 +665,35 @@ def orderFunc(a,b,c,d):
 result = partial(orderFunc,a=5,b=6,c=7)
 print(result(d=8))
 ```
+#### reduce – Combining pairs into a single result
+the reduce function implements a mathematical technique called folding. it applies a pair of previous result and next item in the list to a a function.  
+Lets compute factorial 4:
+```python
+import functools
+import operator
+functools.reduce(operator.mul, range(1, 5))
+```  
+internally following is happening.  
+```python
+from operator import mul
+mul(mul(mul(1, 2), 3), 4)
+
+```
+Lets try to implement reduce function ourselves:
+```python
+import operator
+
+def reduce(f, iterable):
+    result, *iterable = iterable
+    for e in iterable:
+        result = f(result, e)
+
+    return result
+
+print(reduce(operator.mul, list(range(1, 5))))
+```
+Using the form a, *b = c, we can split an iterable between the first item and the remaining ones. Which means that a, *b = [1, 2, 3] will result in a=1, b=[2, 3].
+
 
 #### High cohesion and low coupling
 when a class's attributes and methods are closely related, it is said to have high cohesion. 
